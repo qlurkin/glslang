@@ -1,41 +1,44 @@
 project "GLSLANG"
 	kind "StaticLib"
-	language "C"
+	language "C++"
+	cppdialect "C++17"
 	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	includedirs{
+		"glslang/Public",
+		"glslang/Include",
+		"glslang/MachineIndependent",
+		"OGLCompilersDLL"
+	}
+
 	files
 	{
-		
+		"glslang/**",
+		"OGLCompilersDLL/**",
+		"SPIRV/**"
 	}
+
+	excludes{
+		"gtests/**",
+		"StandAlone/**",
+		"Test/**"
+	}
+
 	filter "system:linux"
-		pic "On"
+		--pic "On"
 		systemversion "latest"
-
-		files
-		{
-			
-		}
-
-		defines
-		{
-			
-		}
+		excludes {"glslang/OSDependent/Windows/**"}
 
 	filter "system:windows"
 		systemversion "latest"
 
-		files
-		{
-			
-		}
+	filter "system:macosx"
+		systemversion "latest"
+		excludes {"glslang/OSDependent/Windows/**"}
 
-		defines 
-		{ 
-			
-		}
 
 	filter "configurations:Debug"
 		runtime "Debug"
