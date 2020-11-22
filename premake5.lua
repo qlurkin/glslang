@@ -11,7 +11,8 @@ project "GLSLANG"
 		"glslang/Public",
 		"glslang/Include",
 		"glslang/MachineIndependent",
-		"OGLCompilersDLL"
+		"OGLCompilersDLL",
+		"."
 	}
 
 	files
